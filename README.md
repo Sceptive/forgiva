@@ -1,5 +1,7 @@
 Forgiva  Open Source  Edition
 =============================
+For more information please refer to https://www.forgiva.com
+
 ## Overview
 
 Forgiva is a brand new password managing idea. It's developed by security
