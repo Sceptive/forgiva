@@ -7,8 +7,8 @@ Gem::Specification.new do |gem|
   gem.description = 'The new-age password manager.'
   gem.authors     = ['Harun Esur']
   gem.email       = 'root@sceptive.com'
-  gem.homepage    = 'http://sceptive.com'
-  gem.license     = 'MIT'
+  gem.homepage    = 'https://www.forgiva.com'
+  gem.license     = 'CC NC-SA 4.0'
   gem.requirements << 'Ruby should be compiled with openssl support.'
 
   gem.executables << 'forgiva'
