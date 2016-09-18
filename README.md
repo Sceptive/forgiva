@@ -1,7 +1,5 @@
 Forgiva  Open Source  Edition
 =============================
-The new-age password manager.
-
 ## Overview
 
 Forgiva is a brand new password managing idea. It's developed by security
