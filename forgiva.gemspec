@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name        = 'forgiva'
-  gem.version     = '1.0-0'
+  gem.version     = '1.0.1.1'
   gem.date        = '2016-07-12'
 
   gem.summary     = 'Forgiva'

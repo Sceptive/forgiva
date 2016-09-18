@@ -3,6 +3,8 @@
 require 'forgiva_test'
 require 'forgiva_commands'
 require 'constants'
+require 'openssl'
+
 
 BANNER = Constants::COLOR_CYA + "\n      .-\" L_  " +
           Constants::COLOR_CYA + "  FORGIVA  (" + Constants::COLOR_MGN + "Open Source Edition" + Constants::COLOR_CYA + ")\n " +
@@ -34,6 +36,35 @@ ENDHELP
 
 
 puts BANNER
+
+BUG_NOTIFICATION = <<ENDBN
+  It's recommended you to upgrade Ruby install with rvm at https://rvm.io and executing;
+
+  $ rvm install 2.1
+  $ rvm use 2.1
+
+  will be enough for OpenSSL compatibility.
+
+ENDBN
+
+# Checks against the unknown cipher or digest algorithm due to bugs
+Constants::ENC_ALGS.each do |ea|
+    if (OpenSSL::Cipher.ciphers.find_index(ea) == nil) then
+        puts Constants::COLOR_CYA + "OpenSSL installation lacks of #{ea} algorithm.\n" + Constants::COLOR_RST +  BUG_NOTIFICATION
+        exit 1
+    end
+end
+
+Constants::HASH_ALGS.each do |ha|
+  begin
+    OpenSSL::Digest.new(ha)
+  rescue
+    puts Constants::COLOR_CYA + "OpenSSL installation lacks of #{ha} algorithm.\n" + Constants::COLOR_RST +  BUG_NOTIFICATION
+    exit 1
+  end
+end
+
+
 
 hash_args = {}
 
