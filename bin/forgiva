@@ -1,0 +1,70 @@
+#!/usr/bin/env ruby
+
+require 'forgiva_test'
+require 'forgiva_commands'
+require 'constants'
+
+BANNER = Constants::COLOR_CYA + "\n      .-\" L_  " +
+          Constants::COLOR_CYA + "  FORGIVA  (" + Constants::COLOR_MGN + "Open Source Edition" + Constants::COLOR_CYA + ")\n " +
+          Constants::COLOR_CYA + ";`, /   ( o\\  " +
+          Constants::COLOR_CYA + " The new-age password manager\n" +
+          Constants::COLOR_CYA + " \\  ;    `, /  \n" +
+          " ;_/\"`.__.-\" \n\n" + Constants::COLOR_RST
+
+USAGE = <<ENDUSAGE
+Usage:
+  forgiva [-h HOST] [-a ACCOUNT-ID] [-l LENGTH] [-s] [-c [1-3]] [-e] [OPTION...]
+ENDUSAGE
+
+HELP = <<ENDHELP
+
+Help Options:
+\t-?, --help                       Show help options
+
+Application Options:
+\t-h, --host-name=HOST             Host/Web Site/Domain name (e.g.: facebook.com)
+\t-a, --account=ACCOUNT-ID         Account id to log-in to host such as such as e-mail address or nick-name etc.
+\t-r, --renewal-date=DATE       Date for passwords to generate
+\t-l, --length=LENGTH              Password length (Default: 16)
+\t-s, --save-credentials           Save host name and account to local database to remember next time
+\t-c, --complexity=C_LEVEL         0-3 complexity level of password generation. (Default: 0)
+\t-e, --select-credentials         Select host and account info from saved list of credentials. If just host or account specified then you get filtered credentials.
+\t-t, --test                       Runs core tests for the algorithm
+ENDHELP
+
+
+puts BANNER
+
+hash_args = {}
+
+t_hash_args = Hash[ ARGV.join(" ").scan(/--?([^=\s]+)(?:[=\s+]?([^-]\S+))?/)  ]
+
+
+# Fixes bug if somehow option get set as value
+t_hash_args.each do |key,val|
+
+  if (val == nil) then
+    hash_args[key] = nil
+  else
+    if (val.strip.start_with?("-")) then
+      hash_args[key] = nil
+      hash_args[val.strip.gsub(/-/,'')] = nil
+    else
+      hash_args[key] = val
+    end
+  end
+end
+
+
+if (hash_args.key?('?') || hash_args.key?('help')) then
+  puts USAGE
+  puts HELP
+  exit 1
+end
+
+if (hash_args.key?('t') || hash_args.key?('test')) then
+  ForgivaTest.run_tests
+  exit 1
+end
+
+ForgivaCommands.new(hash_args).run
