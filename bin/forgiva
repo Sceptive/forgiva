@@ -68,7 +68,14 @@ end
 
 hash_args = {}
 
-t_hash_args = Hash[ ARGV.join(" ").scan(/--?([^=\s]+)(?:[=\s+]?([^-]\S+))?/)  ]
+
+
+t_hash_args = Hash[ ARGV.join(" ").
+  gsub("-e","-e 0").
+  gsub("-t","-t 0").
+  gsub("-s","-s 0").
+  scan(/--?([^=\s]+)(?:[=\s+]?([^-]\S+))?/)  ]
+
 
 
 # Fixes bug if somehow option get set as value
@@ -85,6 +92,7 @@ t_hash_args.each do |key,val|
     end
   end
 end
+
 
 
 if (hash_args.key?('?') || hash_args.key?('help')) then

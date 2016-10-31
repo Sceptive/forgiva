@@ -110,10 +110,6 @@ class ForgivaCommands
     hash_args.key? 's' || hash_args.key?('save-credentials')
   end
 
-
-
-
-
   def single_by_choose?
     hash_args.key?('e') || hash_args.key?('select-credentials')
   end
