@@ -9,7 +9,9 @@ module TestVectors
     :master_key => "forgiva_rockz_all_the_fuck1ng_t1m3",
     :complexity => Constants::FORGIVA_PG_SIMPLE,
     :animal_name => "Ape",
-    :expected_password_hash => "797036592a475f78444c6153504d3757"},
+    :expected_password_hash => "797036592a475f78444c6153504d3757",
+    :expected_password_hash_scrypt => "466b74674d645a4d6939302a6e56797a"
+    },
 
     ## facebook.com - root
     {:host => "facebook.com",
@@ -18,7 +20,8 @@ module TestVectors
      :master_key => "forgiva_rockz_all_the_fuck1ng_t1m3",
      :complexity => Constants::FORGIVA_PG_INTERMEDIATE,
      :animal_name => "Bat",
-     :expected_password_hash => "5544245f2b72682e4635765040416a49"
+     :expected_password_hash => "5544245f2b72682e4635765040416a49",
+     :expected_password_hash_scrypt => "354b223d3b6c246733386c2d6674283d"
 
     },
 
@@ -29,7 +32,8 @@ module TestVectors
       :master_key => "forgiva_rockz_all_the_fuck1ng_t1m3",
       :complexity => Constants::FORGIVA_PG_ADVANCED,
       :animal_name => "Bear",
-      :expected_password_hash => "4f5c7653513251417a675949284c5539"
+      :expected_password_hash => "4f5c7653513251417a675949284c5539",
+      :expected_password_hash_scrypt => "587a796a7c40267426637b694d345459"
 
     },
 
@@ -40,8 +44,11 @@ module TestVectors
        :master_key => "forgiva_rockz_all_the_fuck1ng_t1m3",
        :complexity => Constants::FORGIVA_PG_SIMPLE,
        :animal_name => "Whale",
-       :expected_password_hash => "6465635a675374322f47695051464157"
+       :expected_password_hash => "6465635a675374322f47695051464157",
+       :expected_password_hash_scrypt => "496375392e63486a59434473334d6169"
       },
+      
+
 
     ## microsoft.com - toor
     {:host => "microsoft.com",
@@ -50,8 +57,10 @@ module TestVectors
      :master_key => "forgiva_rockz_all_the_fuck1ng_t1m3",
      :complexity => Constants::FORGIVA_PG_INTERMEDIATE,
      :animal_name => "Crow",
-     :expected_password_hash => "4d314573586d403649672970786d7133"
+     :expected_password_hash => "4d314573586d403649672970786d7133",
+     :expected_password_hash_scrypt => "3e51542a4d364d31657673467c6d4728"
     },
+
 
     ## 192.168.0.1 - root
     {:host => "192.168.0.1",
@@ -60,8 +69,11 @@ module TestVectors
       :master_key => "forgiva_rockz_all_the_fuck1ng_t1m3",
       :complexity => Constants::FORGIVA_PG_ADVANCED,
       :animal_name => "Dog",
-      :expected_password_hash => "2c376d234a7a6c4d6f785c34494a672a"
+      :expected_password_hash => "2c376d234a7a6c4d6f785c34494a672a",
+      :expected_password_hash_scrypt => "4939c2a232217c5c405a6c714e76552566"
     },
+
+
 
     ## 10.0.0.2:22 - root
     {:host => "10.0.0.2:22",
@@ -70,9 +82,12 @@ module TestVectors
        :master_key => "forgiva_rockz_all_the_fuck1ng_t1m3",
        :complexity => Constants::FORGIVA_PG_SIMPLE,
        :animal_name => "Duck",
-       :expected_password_hash => "6440562a36375065693646396e312c4b"
+       :expected_password_hash => "6440562a36375065693646396e312c4b",
+       :expected_password_hash_scrypt => "345057425a5133756c5965745f7a7054"
 
     },
+
+    
 
     ## 10.0.0.2:22 - k3ym4k3r
     {:host => "10.0.0.2:22",
@@ -81,7 +96,8 @@ module TestVectors
       :master_key => "forgiva_rockz_all_the_fuck1ng_t1m3",
       :complexity => Constants::FORGIVA_PG_INTERMEDIATE,
       :animal_name => "Cat",
-      :expected_password_hash => "78435f57566e2f53535f2e617738293b"
+      :expected_password_hash => "78435f57566e2f53535f2e617738293b",
+      :expected_password_hash_scrypt => "5c624f23723e704673452530773e3144"
 
     },
 
@@ -92,7 +108,8 @@ module TestVectors
       :master_key => "forgiva_rockz_all_the_fuck1ng_t1m3",
       :complexity => Constants::FORGIVA_PG_ADVANCED,
       :animal_name => "Wasp",
-      :expected_password_hash => "54534a582b265f337e2e43403b536861"
+      :expected_password_hash => "54534a582b265f337e2e43403b536861",
+      :expected_password_hash_scrypt => "332b2541364e306537704e4551763938"
     }].freeze
 
     FA_TESTS = [{:is_encryption_algorithm => true,

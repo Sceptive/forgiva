@@ -34,9 +34,13 @@ class ForgivaTest
 
       TestVectors::FG_TESTS.each do |test_vec|
 
+        for i in 0..1 do
           puts "#{Constants::COLOR_GRN} Testing forgiva #{Constants::COLOR_BLU} #{test_vec[:host]}  " \
           <<"/ #{test_vec[:account]} / #{test_vec[:renewal_date]} /  #{Constants::COLOR_MGN} #{test_vec[:animal_name]} #{Constants::COLOR_GRN} " \
-          <<" on complexity #{test_vec[:complexity]} #{Constants::COLOR_RST}"
+          <<" on complexity #{test_vec[:complexity]} #{Constants::COLOR_RST}" \
+          <<"#{Constants::COLOR_YEL}" \
+          << (i == 1 ? "+SCRYPT" : "") \
+          << "#{Constants::COLOR_RST}"
 
           p_hash = OpenSSL::Digest.digest("sha512",test_vec[:master_key])
 
@@ -45,16 +49,20 @@ class ForgivaTest
           test_vec[:renewal_date],
           p_hash,
           test_vec[:complexity],
-          16).passwords
+          16,
+          i == 1
+          ).passwords
 
           g_pass = passes[test_vec[:animal_name]].unpack('H*')[0]
 
+          expected = (i == 0 ? test_vec[:expected_password_hash] : test_vec[:expected_password_hash_scrypt])
 
-          if (g_pass.downcase != test_vec[:expected_password_hash]) then
-              puts "#{Constants::COLOR_RED}  FAILED: (Expected: #{test_vec[:expected_password_hash]}) #{Constants::COLOR_RST} #{g_pass}"
+          if (g_pass.downcase != expected) then
+              puts "#{Constants::COLOR_RED}  FAILED: (Expected: #{expected}) #{Constants::COLOR_RST} #{g_pass}"
           else
               puts "#{Constants::COLOR_GRN}! SUCCESS: (#{g_pass}) #{Constants::COLOR_RST}"
           end
+        end
         
 
       end

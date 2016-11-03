@@ -15,7 +15,7 @@ BANNER = Constants::COLOR_CYA + "\n      .-\" L_  " +
 
 USAGE = <<ENDUSAGE
 Usage:
-  forgiva [-h HOST] [-a ACCOUNT-ID] [-l LENGTH] [-s] [-c [1-3]] [-e] [OPTION...]
+  forgiva [-h HOST] [-a ACCOUNT-ID] [-l LENGTH] [-s] [-c [1-3]] [-e] [-p] [OPTION...]
 ENDUSAGE
 
 HELP = <<ENDHELP
@@ -32,6 +32,7 @@ Application Options:
 \t-c, --complexity=C_LEVEL         0-3 complexity level of password generation. (Default: 0)
 \t-e, --select-credentials         Select host and account info from saved list of credentials. If just host or account specified then you get filtered credentials.
 \t-t, --test                       Runs core tests for the algorithm
+\t-p, --scrypt                     Use scrypt algorithm to strengthen algorithm
 ENDHELP
 
 
@@ -74,6 +75,7 @@ t_hash_args = Hash[ ARGV.join(" ").
   gsub("-e","-e 0").
   gsub("-t","-t 0").
   gsub("-s","-s 0").
+  gsub("-p","-p 0").
   scan(/--?([^=\s]+)(?:[=\s+]?([^-]\S+))?/)  ]
 
 

@@ -91,13 +91,14 @@ class ForgivaCommands
     init_length
     init_master_password
     init_complexity
+    init_scrypt
 
     puts Constants::COLOR_GRN + "Generating..." + Constants::COLOR_RST
     puts ""
 
     record if record?
 
-    passwords = make_passwords(@hostname, @account, @renewal_date, @master_password, @complexity, @length)
+    passwords = make_passwords(@hostname, @account, @renewal_date, @master_password, @complexity, @length, @use_scrypt)
 
     if animals.length > 1
       Constants::ANIMALS.each { |a| puts  "#{Constants::COLOR_YEL}#{a}#{Constants::COLOR_RST}\t#{Constants::COLOR_BRI}#{passwords[a]}#{Constants::COLOR_RST}" }
@@ -112,6 +113,10 @@ class ForgivaCommands
 
   def single_by_choose?
     hash_args.key?('e') || hash_args.key?('select-credentials')
+  end
+
+  def init_scrypt 
+    @use_scrypt = (hash_args['p'] != nil || hash_args['scrypt'] != nil)
   end
 
   def init_length
@@ -178,8 +183,8 @@ class ForgivaCommands
 
   end
 
-  def make_passwords(hostname, account, renewal_date, master_password, complexity,length)
-    Forgiva.new(hostname, account, renewal_date, master_password,complexity,length).passwords
+  def make_passwords(hostname, account, renewal_date, master_password, complexity,length,use_scrypt)
+    Forgiva.new(hostname, account, renewal_date, master_password,complexity,length,use_scrypt).passwords
   end
 
 

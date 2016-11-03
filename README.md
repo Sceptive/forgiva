@@ -80,9 +80,18 @@ Application Options:
        	-c, --complexity=C_LEVEL         0-3 complexity level of password generation. (Default: 0)
        	-e, --select-credentials         Select host and account info from saved list of credentials. If just host or account specified then you get filtered credentials.
        	-t, --test                       Runs core tests for the algorithm
+       	-p, --scrypt                     Use scrypt algorithm to strengthen algorithm
 ```
 
+## Release notes
+
+	- 1.0.1.3 and 1.0.1.4
+		- Added scrypt support with -p/--scrypt option
+		- Fixed various parameter parsing bugs
+
 ## Algorithm
+
+(Note: After 1.0.1.4 version, SCrypt support added)
 
 Forgiva uses following digest and encryption algorithm to complex password
 generation phases:
@@ -201,11 +210,15 @@ Forgiva uses PBKDF2-HMAC as base of the key-derivation family and uses **forgiva
 
 Depending on choices of the complexity it uses SHA1 (Normal),SHA256 (Intermediate) and SHA512 (Advanced) hashing algorithms.
 
+Note: After 1.0.1.4 Algorithm; SCrypt support added
+
 ```
 	algorithm key-derivation
 		Input: forgiva-encrypted-inputs as SALT, SHA512 value of master key as KEY
 		Output: Array of password sized of animal count
 		hash = KEY
+		if scrypt_required
+			hash = scrypt(hash,SALT,131072,8,1) // n = 2^7 , p=8, r=1 
 		for each Animal
 			hash = PBKDF2_HMAC_SHA1(hash,SALT, 10.000 iterationg with 32 bit key expectation)
 			password = forgiva-hash-to-password(hash)

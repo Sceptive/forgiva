@@ -2,18 +2,20 @@
 require 'openssl'
 require 'highline/import'
 require 'constants'
+require 'scrypt'
 
 # Password generation from 4 inputs
 class Forgiva
-  attr_accessor :hostname, :account, :renewal_date, :master_password, :complexity, :length
+  attr_accessor :hostname, :account, :renewal_date, :master_password, :complexity, :length, :use_scrypt
 
-  def initialize(hostname, account, renewal_date, master_password, complexity, length)
+  def initialize(hostname, account, renewal_date, master_password, complexity, length, use_scrypt)
     @hostname = hostname
     @account = account
     @renewal_date = renewal_date
     @master_password = master_password
     @complexity = complexity
     @length = length
+    @use_scrypt = use_scrypt
   end
 
   def passwords
@@ -42,6 +44,10 @@ class Forgiva
     end
 
     puts "ENC KEY: #{key.unpack('H*')}"  if Constants::DEBUG_OUTPUT
+
+    if (@use_scrypt) then
+      key = SCrypt::Engine.scrypt(key,salt,131072,8,1,32)
+    end
 
 
     Constants::ANIMALS.each do |a|
