@@ -19,5 +19,5 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'scrypt'
 
 
-  gem.add_development_dependency 'rubocop', '~> 0.26'
+  gem.add_development_dependency 'rubocop', '~> 0.52'
 end
