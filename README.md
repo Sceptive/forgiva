@@ -1,6 +1,10 @@
-Forgiva  Open Source  Edition
-=============================
-For more information please refer to https://www.forgiva.com
+## Important
+
+**Please note that this repository is hold for the references purposes. 
+Forgiva evolved into Forgiva Enterprise and became fully open-source. Please
+refer to [Forgiva Integrator](https://github.com/Sceptive/forgiva-integrator) repository
+for more information.**
+
 
 ## Overview
 
